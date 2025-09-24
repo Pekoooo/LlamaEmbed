@@ -113,8 +113,8 @@ Query: "food shopping"          Stored Memo: "buy pizza ingredients"
        │                                       │
        └─────────── Cosine Similarity ─────────┘
                            ↓
-                      Score: 0.87
-                   (High similarity!)
+                      Score: 0.87 (1 is the max and -1 is the minimum)
+                   
 ```
 
 #### Cosine Similarity Calculation
