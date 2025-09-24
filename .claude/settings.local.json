@@ -1,0 +1,23 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(export JAVA_HOME=\"/c/Program Files/Android/Android Studio/jbr\")",
+      "Bash(./gradlew compileDebugKotlin:*)",
+      "Bash(./gradlew:*)",
+      "WebFetch(domain:javadoc.io)",
+      "WebFetch(domain:github.com)",
+      "WebSearch",
+      "Read(//c/Users/Clement/llama.cpp/examples/llama.android/llama/**)",
+      "Read(//c/Users/Clement/llama.cpp/**)",
+      "Bash(find:*)",
+      "Bash(git init:*)",
+      "Bash(git add:*)",
+      "Bash(git push:*)",
+      "Bash(git reset:*)",
+      "Bash(git rm:*)",
+      "Bash(git filter-branch:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
