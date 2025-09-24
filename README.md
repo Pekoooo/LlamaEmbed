@@ -72,7 +72,7 @@ The ML pipeline flows through multiple layers for local AI processing:
                                                                    │
 ┌─────────────┐    ┌──────────────┐    ┌─────────────┐    ┌────────▼─────┐
 │  DATABASE   │    │     JNI      │    │   LLAMA.CPP │    │ EMBEDDING    │
-│  UPDATED    │◀───│   WRAPPER    │◀───│   LIBRARY   │◀─│ GENERATION   │
+│  UPDATED    │◀───│   WRAPPER    │◀──│   LIBRARY   │◀──│ GENERATION   │
 │(text+embed) │    │              │    │             │    │(with text id)│
 └─────────────┘    └──────────────┘    └─────────────┘    └──────────────┘
 ```
