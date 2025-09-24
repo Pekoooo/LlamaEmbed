@@ -56,10 +56,17 @@ app/src/main/java/com/example/llamaembed/
 - **VoiceMemoDao**: Flow-based database queries
 - **VoiceMemoRepository**: Repository with semantic search capabilities
 
-### ML Integration
-- **EmbeddingGemmaManager**: ONNX model loading and inference
-- **Embedding Generation**: Task-specific prompts for classification
-- **Cosine Similarity**: For finding similar memos
+### ML Integration Pipeline
+The ML pipeline flows through multiple layers for local AI processing:
+
+- **Kotlin Layer (AIRepository)**: High-level embedding operations and similarity calculations
+- **JNI Wrapper (LLamaAndroid.kt)**: Bridge between Kotlin and native C++ code
+- **Native C++ (llama-android.cpp)**: Direct interface to llama.cpp library
+- **llama.cpp Library**: Core inference engine for EmbeddingGemma model
+- **Model Processing**: Text tokenization, embedding generation, and vector operations
+- **Cosine Similarity**: Mathematical similarity scoring between embedding vectors
+
+**Data Flow**: Text → JNI → C++ → llama.cpp → EmbeddingGemma → Float Array → ByteArray → Database
 
 ### UI Components
 - **RecordButton**: Animated FAB with state transitions
