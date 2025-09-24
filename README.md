@@ -1,4 +1,4 @@
-# LlamaEmbed - Offline Voice Memo App with llama.cpp Integration
+# LlamaEmbed - Offline AI Voice Memos with Semantic Search Using Local Embeddings
 
 A modern Android voice memo application that uses EmbeddingGemma model via llama.cpp for semantic search and AI-powered memo organization.
 
