@@ -98,10 +98,6 @@ The ML pipeline flows through multiple layers for local AI processing:
 3. Add model files to assets (see above)
 4. Build and run on device or emulator
 
-```bash
-./gradlew assembleDebug
-```
-
 ## Usage
 
 ### Recording Memos
@@ -120,6 +116,7 @@ The ML pipeline flows through multiple layers for local AI processing:
 - **View**: Tap memo to see semantically searched similar memos
 - **Delete**: Delete button on the memo
 - **Refresh**: Refresh button on the top right corner of the screen
+- **Generate Memos**: Tap the "+" button on the top right corner to generate 20 memos
 ## Flow-Based Architecture
 
 ### StateFlow in ViewModel
