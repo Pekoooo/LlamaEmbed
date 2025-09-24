@@ -117,26 +117,6 @@ Query: "food shopping"          Stored Memo: "buy pizza ingredients"
                    
 ```
 
-#### Cosine Similarity Calculation
-```
-Cosine Similarity = A·B / (||A|| × ||B||)
-
-Where:
-• A·B = Dot Product of vectors
-• ||A|| = Magnitude of vector A
-• ||B|| = Magnitude of vector B
-
-Example:
-Query Vector A: [0.2, 0.8, 0.1]
-Memo Vector B:  [0.3, 0.7, 0.2]
-
-A·B = (0.2×0.3) + (0.8×0.7) + (0.1×0.2) = 0.64
-||A|| = √(0.2² + 0.8² + 0.1²) = 0.83
-||B|| = √(0.3² + 0.7² + 0.2²) = 0.78
-
-Similarity = 0.64 / (0.83 × 0.78) = 0.99 
-```
-
 #### Search Process Visualization
 ```
   Search Query: "healthy meal prep"
