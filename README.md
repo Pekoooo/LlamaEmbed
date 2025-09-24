@@ -61,7 +61,101 @@ The ML pipeline flows through multiple layers for local AI processing:
 - **Model Processing**: Text tokenization, embedding generation, and vector operations
 - **Cosine Similarity**: Mathematical similarity scoring between embedding vectors
 
-**Data Flow**: Text → JNI → C++ → llama.cpp → Embedding Model → Float Array → ByteArray → Database
+#### Complete Voice-to-Embedding Pipeline
+```
+┌─────────────┐    ┌──────────────┐    ┌─────────────┐    ┌─────────────┐
+│   USER      │    │   ANDROID    │    │   KOTLIN    │    │  DATABASE   │
+│   VOICE     │───▶│   SPEECH     │───▶│    TEXT     │───▶│   STORAGE   │
+│   🎤        │    │     API      │    │             │    │ (text only) │
+└─────────────┘    └──────────────┘    └─────────────┘    └─────────────┘
+                                              │                    │
+                                              ▼                    │
+┌─────────────┐    ┌──────────────┐    ┌─────────────┐    ┌────────▼─────┐
+│  DATABASE   │    │     JNI      │    │   LLAMA.CPP │    │ EMBEDDING    │
+│  UPDATED    │◀───│   WRAPPER    │◀───│   LIBRARY   │◀───│ GENERATION   │
+│(text+embed)│    │              │    │             │    │     🧠       │
+└─────────────┘    └──────────────┘    └─────────────┘    └──────────────┘
+```
+
+#### Linear Processing Flow
+```
+1. 🎤 User Voice: "Buy ingredients for pizza"
+                        ↓
+2. 📱 Android Speech API → Text Recognition
+                        ↓
+3. 💾 Save to Database (memo_id = 42)
+                        ↓
+4. 🔄 AIRepository.generateEmbedding(text)
+                        ↓
+5. 🌉 JNI Bridge → LLamaAndroid.get_embeddings()
+                        ↓
+6. ⚙️  C++ → llama.cpp → EmbeddingGemma Model
+                        ↓
+7. 📊 Float[768] → ByteArray Conversion
+                        ↓
+8. 💾 Database Update: memo_id 42 + embedding BLOB
+                        ↓
+9. ✅ Memo Ready for Semantic Search
+```
+
+### Semantic Search with Cosine Similarity
+
+#### How Semantic Search Works
+```
+Query: "food shopping"          Stored Memo: "buy pizza ingredients"
+       ↓                                        ↓
+   Embedding                               Embedding
+┌─────────────┐                        ┌─────────────┐
+│ [0.2, 0.8,  │                        │ [0.3, 0.7,  │
+│  0.1, 0.9,  │  ←─ Calculate ────────▶│  0.2, 0.8,  │
+│  0.4, 0.6]  │     Similarity         │  0.5, 0.5]  │
+└─────────────┘                        └─────────────┘
+       │                                        │
+       └─────────── Cosine Similarity ─────────┘
+                           ↓
+                      Score: 0.87
+                    (High similarity!)
+```
+
+#### Cosine Similarity Calculation
+```
+Cosine Similarity = A·B / (||A|| × ||B||)
+
+Where:
+• A·B = Dot Product of vectors
+• ||A|| = Magnitude of vector A
+• ||B|| = Magnitude of vector B
+
+Example:
+Query Vector A: [0.2, 0.8, 0.1]
+Memo Vector B:  [0.3, 0.7, 0.2]
+
+A·B = (0.2×0.3) + (0.8×0.7) + (0.1×0.2) = 0.64
+||A|| = √(0.2² + 0.8² + 0.1²) = 0.83
+||B|| = √(0.3² + 0.7² + 0.2²) = 0.78
+
+Similarity = 0.64 / (0.83 × 0.78) = 0.99 ✨
+```
+
+#### Search Process Visualization
+```
+🔍 Search Query: "healthy meal prep"
+                    ↓
+              Generate Embedding
+                    ↓
+┌─────────────────────────────────────────────────┐
+│           Compare with All Stored Memos         │
+├─────────────────────────────────────────────────┤
+│ "buy vegetables" ────────────── Similarity: 0.89 │ ✅
+│ "team meeting notes" ─────────── Similarity: 0.21 │ ❌
+│ "workout routine" ────────────── Similarity: 0.76 │ ✅
+│ "grocery list quinoa" ────────── Similarity: 0.82 │ ✅
+└─────────────────────────────────────────────────┘
+                    ↓
+           Filter by Threshold (>0.62)
+                    ↓
+          📋 Return Relevant Results
+```
 
 ### UI Components
 - **RecordButton**: Animated FAB with state transitions
