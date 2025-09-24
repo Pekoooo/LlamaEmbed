@@ -139,7 +139,7 @@ Similarity = 0.64 / (0.83 × 0.78) = 0.99
 
 #### Search Process Visualization
 ```
-🔍 Search Query: "healthy meal prep"
+  Search Query: "healthy meal prep"
                     ↓
               Generate Embedding
                     ↓
