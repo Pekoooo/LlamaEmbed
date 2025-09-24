@@ -28,15 +28,15 @@ class VoiceMemoApplication : Application() {
         // Start AI model initialization in background
         applicationScope.launch {
             try {
-                Log.d(TAG, "🚀 Starting AI model initialization...")
+                Log.d(TAG, " Starting AI model initialization...")
                 val success = aiRepository.initialize()
                 if (success) {
-                    Log.d(TAG, "✅ AI model initialized successfully during app startup")
+                    Log.d(TAG, " AI model initialized successfully during app startup")
                 } else {
-                    Log.w(TAG, "⚠️ AI model initialization failed during app startup")
+                    Log.w(TAG, "⚠ AI model initialization failed during app startup")
                 }
             } catch (e: Exception) {
-                Log.e(TAG, "❌ Error during AI model initialization: ${e.message}", e)
+                Log.e(TAG, " Error during AI model initialization: ${e.message}", e)
             }
         }
     }
