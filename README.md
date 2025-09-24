@@ -151,16 +151,6 @@ LaunchedEffect(viewModel) {
 - Background thread for inference
 - Efficient memory management
 
-### Database Operations
-- Flow-based reactive queries
-- Proper indexing for search performance
-- Background thread for embedding generation
-
-### UI Optimization
-- Lazy loading in lists
-- Proper Compose recomposition
-- Efficient state management
-
 ## Permissions
 
 The app requires the following permissions:
