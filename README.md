@@ -5,19 +5,20 @@ A modern Android voice memo application that uses EmbeddingGemma model via llama
 ## Features
 
 ### Core Functionality
-- 🎤 **Voice Recording**: Record voice memos using Android's built-in speech recognition
-- 📝 **Speech-to-Text**: Automatic transcription of voice recordings
-- 🔍 **Semantic Search**: AI-powered search using embedding similarity
-- 💾 **Local Storage**: Offline-first approach with Room database
-- 🏷️ **Smart Organization**: Automatic memo categorization using embeddings
+-  **Voice Recording**: Record voice memos using Android's built-in speech recognition
+-  **Speech-to-Text**: Automatic transcription of voice recordings
+-  **Semantic Search**: AI-powered search using embedding similarity
+-  **Local Storage**: Offline-first approach with Room database
+-  **Smart Organization**: Automatic memo categorization using embeddings
+-  **Tap note to search**: Tap a note to semantically search similar notes in your database
 
 ### Technical Features
-- 📱 **Modern UI**: Material 3 design with Jetpack Compose
-- 🏗️ **MVVM Architecture**: Clean architecture with ViewModel and StateFlow
-- 🔄 **Reactive Programming**: Flow-based data access and UI updates
-- 💉 **Dependency Injection**: Hilt for clean dependency management
-- 🧪 **Testing**: Unit and integration tests included
-- 🎯 **Performance**: Optimized for mobile with efficient model loading
+-  **Modern UI**: Material 3 design with Jetpack Compose
+-  **MVVM Architecture**: Clean architecture with ViewModel and StateFlow
+-  **Reactive Programming**: Flow-based data access and UI updates
+-  **Dependency Injection**: Hilt for clean dependency management
+-  **Testing**: Unit and integration tests included
+-  **Performance**: Optimized for mobile with efficient model loading
 
 ## Architecture
 
@@ -62,16 +63,15 @@ The ML pipeline flows through multiple layers for local AI processing:
 - **Kotlin Layer (AIRepository)**: High-level embedding operations and similarity calculations
 - **JNI Wrapper (LLamaAndroid.kt)**: Bridge between Kotlin and native C++ code
 - **Native C++ (llama-android.cpp)**: Direct interface to llama.cpp library
-- **llama.cpp Library**: Core inference engine for EmbeddingGemma model
+- **llama.cpp Library**: Core inference engine for compatible models
 - **Model Processing**: Text tokenization, embedding generation, and vector operations
 - **Cosine Similarity**: Mathematical similarity scoring between embedding vectors
 
-**Data Flow**: Text → JNI → C++ → llama.cpp → EmbeddingGemma → Float Array → ByteArray → Database
+**Data Flow**: Text → JNI → C++ → llama.cpp → Embedding Model → Float Array → ByteArray → Database
 
 ### UI Components
 - **RecordButton**: Animated FAB with state transitions
 - **SearchBar**: Real-time search with debouncing
-- **VoiceMemoItem**: Swipe-to-delete memo cards
 - **VoiceMemoScreen**: Main screen with comprehensive state management
 
 ## Setup Instructions
@@ -82,7 +82,7 @@ The ML pipeline flows through multiple layers for local AI processing:
 - Device with microphone support
 
 ### Model Setup
-1. Download the EmbeddingGemma GGUF model files
+1. Download the EmbeddingGemma GGUF model files (or any other llama.cpp compatible models)
 2. Place them in `app/src/main/assets/models/`:
    ```
    models/
@@ -117,10 +117,9 @@ The ML pipeline flows through multiple layers for local AI processing:
 4. Traditional text search is also supported
 
 ### Managing Memos
-- **View**: Tap memo to see full content and similar memos
-- **Delete**: Swipe left to delete with undo option
-- **Refresh**: Pull down to refresh the memo list
-
+- **View**: Tap memo to see semantically searched similar memos
+- **Delete**: Delete button on the memo
+- **Refresh**: Refresh button on the top right corner of the screen
 ## Flow-Based Architecture
 
 ### StateFlow in ViewModel
@@ -154,24 +153,6 @@ LaunchedEffect(viewModel) {
 }
 ```
 
-## Testing
-
-### Unit Tests
-```bash
-./gradlew test
-```
-
-### UI Tests
-```bash
-./gradlew connectedAndroidTest
-```
-
-### Test Coverage
-- ViewModel business logic testing
-- Repository data access testing
-- Compose UI component testing
-- Integration testing with Hilt
-
 ## Performance Considerations
 
 ### Model Loading
@@ -193,8 +174,6 @@ LaunchedEffect(viewModel) {
 
 The app requires the following permissions:
 - `RECORD_AUDIO`: For voice recording
-- `INTERNET`: For potential model updates (optional)
-- `ACCESS_NETWORK_STATE`: For network status checking
 
 ## Dependencies
 
@@ -202,7 +181,6 @@ The app requires the following permissions:
 - Compose BOM 2023.10.01
 - Hilt 2.48
 - Room 2.5.0
-- ONNX Runtime Android 1.16.0
 - Coroutines 1.7.3
 
 ### UI Dependencies
@@ -217,17 +195,7 @@ The app requires the following permissions:
 3. Implement changes with tests
 4. Submit a pull request
 
-## License
 
-[Add your license here]
-
-## Acknowledgments
-
-- Google's EmbeddingGemma model
-- ONNX Runtime team
-- Android Jetpack Compose team
-- Material Design team
 
 ---
 
-**Note**: This app demonstrates modern Android development practices with AI integration. The EmbeddingGemma model enables powerful semantic search capabilities while maintaining privacy through on-device processing.
