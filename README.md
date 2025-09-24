@@ -172,27 +172,6 @@ LaunchedEffect(viewModel) {
 The app requires the following permissions:
 - `RECORD_AUDIO`: For voice recording
 
-## Dependencies
-
-### Core Dependencies
-- Compose BOM 2023.10.01
-- Hilt 2.48
-- Room 2.5.0
-- Coroutines 1.7.3
-
-### UI Dependencies
-- Material 3 Compose
-- Accompanist Permissions 0.32.0
-- Lifecycle Compose 2.7.0
-
-## Contributing
-
-1. Fork the repository
-2. Create a feature branch
-3. Implement changes with tests
-4. Submit a pull request
-
-
 
 ---
 
