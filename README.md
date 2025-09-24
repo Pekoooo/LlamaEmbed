@@ -107,14 +107,14 @@ Query: "food shopping"          Stored Memo: "buy pizza ingredients"
    Embedding                               Embedding
 ┌─────────────┐                        ┌─────────────┐
 │ [0.2, 0.8,  │                        │ [0.3, 0.7,  │
-│  0.1, 0.9,  │  ←─ Calculate ────────▶│  0.2, 0.8,  │
-│  0.4, 0.6]  │     Similarity         │  0.5, 0.5]  │
+│  0.1, 0.9,  │ ◀ ─── Calculate ─────▶│  0.2, 0.8,  │
+│  0.4, 0.6]  │       Similarity       │  0.5, 0.5]  │
 └─────────────┘                        └─────────────┘
-       │                                        │
+       │                                       │
        └─────────── Cosine Similarity ─────────┘
                            ↓
                       Score: 0.87
-                    (High similarity!)
+                   (High similarity!)
 ```
 
 #### Cosine Similarity Calculation
@@ -143,14 +143,14 @@ Similarity = 0.64 / (0.83 × 0.78) = 0.99 ✨
                     ↓
               Generate Embedding
                     ↓
-┌─────────────────────────────────────────────────┐
-│           Compare with All Stored Memos         │
-├─────────────────────────────────────────────────┤
-│ "buy vegetables" ────────────── Similarity: 0.89 │ ✅
+┌───────────────────────────────────────────────────┐
+│           Compare with All Stored Memos           │
+├───────────────────────────────────────────────────┤
+│ "buy vegetables" ────────────── Similarity: 0.89  │ ✅
 │ "team meeting notes" ─────────── Similarity: 0.21 │ ❌
 │ "workout routine" ────────────── Similarity: 0.76 │ ✅
 │ "grocery list quinoa" ────────── Similarity: 0.82 │ ✅
-└─────────────────────────────────────────────────┘
+└───────────────────────────────────────────────────┘
                     ↓
            Filter by Threshold (>0.62)
                     ↓
