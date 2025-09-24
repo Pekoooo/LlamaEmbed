@@ -12,24 +12,18 @@ A modern Android voice memo application that uses EmbeddingGemma model via llama
 -  **Smart Organization**: Automatic memo categorization using embeddings
 -  **Tap note to search**: Tap a note to semantically search similar notes in your database
 
-### Technical Features
--  **Modern UI**: Material 3 design with Jetpack Compose
--  **MVVM Architecture**: Clean architecture with ViewModel and StateFlow
--  **Reactive Programming**: Flow-based data access and UI updates
--  **Dependency Injection**: Hilt for clean dependency management
--  **Testing**: Unit and integration tests included
--  **Performance**: Optimized for mobile with efficient model loading
-
 ## Architecture
 
 ### Tech Stack
-- **UI**: Jetpack Compose with Material 3
-- **Architecture**: MVVM with Repository pattern
-- **Database**: Room with Flow-based queries
+- **UI**: Jetpack Compose with Material 3 design
+- **Architecture**: MVVM with Repository pattern and Clean Architecture principles
+- **Database**: Room with Flow-based reactive queries
 - **ML**: llama.cpp with JNI for on-device inference
-- **DI**: Hilt for dependency injection
-- **Async**: Kotlin Coroutines and Flows
+- **DI**: Hilt for clean dependency management
+- **Async**: Kotlin Coroutines and Flow-based reactive programming
 - **Speech**: Android SpeechRecognizer API
+- **Testing**: Unit and integration tests included
+- **Performance**: Optimized for mobile with efficient model loading
 
 ### Project Structure
 ```
