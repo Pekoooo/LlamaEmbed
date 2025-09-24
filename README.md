@@ -65,37 +65,37 @@ The ML pipeline flows through multiple layers for local AI processing:
 ```
 ┌─────────────┐    ┌──────────────┐    ┌─────────────┐    ┌─────────────┐
 │   USER      │    │   ANDROID    │    │   KOTLIN    │    │  DATABASE   │
-│   VOICE     │───▶│   SPEECH     │───▶│    TEXT     │───▶│   STORAGE   │
-│   🎤        │    │     API      │    │             │    │ (text only) │
+│   VOICE     │──▶│   SPEECH     │───▶│    TEXT     │───▶│   STORAGE   │
+│             │    │     API      │    │             │    │ (text only) │
 └─────────────┘    └──────────────┘    └─────────────┘    └─────────────┘
-                                              │                    │
-                                              ▼                    │
+                                                                   │
+                                                                   │
 ┌─────────────┐    ┌──────────────┐    ┌─────────────┐    ┌────────▼─────┐
 │  DATABASE   │    │     JNI      │    │   LLAMA.CPP │    │ EMBEDDING    │
-│  UPDATED    │◀───│   WRAPPER    │◀───│   LIBRARY   │◀───│ GENERATION   │
-│(text+embed)│    │              │    │             │    │     🧠       │
+│  UPDATED    │◀───│   WRAPPER    │◀───│   LIBRARY   │◀─│ GENERATION   │
+│(text+embed) │    │              │    │             │    │(with text id)│
 └─────────────┘    └──────────────┘    └─────────────┘    └──────────────┘
 ```
 
 #### Linear Processing Flow
 ```
-1. 🎤 User Voice: "Buy ingredients for pizza"
+1.  User Voice: "Buy ingredients for pizza"
                         ↓
-2. 📱 Android Speech API → Text Recognition
+2.  Android Speech API → Text Recognition
                         ↓
-3. 💾 Save to Database (memo_id = 42)
+3.  Save to Database (memo_id = 42)
                         ↓
-4. 🔄 AIRepository.generateEmbedding(text)
+4.  AIRepository.generateEmbedding(text)
                         ↓
-5. 🌉 JNI Bridge → LLamaAndroid.get_embeddings()
+5.  JNI Bridge → LLamaAndroid.get_embeddings()
                         ↓
-6. ⚙️  C++ → llama.cpp → EmbeddingGemma Model
+6.   C++ → llama.cpp → EmbeddingGemma Model
                         ↓
-7. 📊 Float[768] → ByteArray Conversion
+7.  Float[768] → ByteArray Conversion
                         ↓
-8. 💾 Database Update: memo_id 42 + embedding BLOB
+8.  Database Update: memo_id 42 + embedding BLOB
                         ↓
-9. ✅ Memo Ready for Semantic Search
+9.  Memo Ready for Semantic Search
 ```
 
 ### Semantic Search with Cosine Similarity
