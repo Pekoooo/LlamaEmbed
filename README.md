@@ -37,9 +37,9 @@ A modern Android voice memo application that uses EmbeddingGemma model via llama
 ┌─────────────────────────────────────────────────────────────────┐
 │                         DOMAIN LAYER                            │
 ├─────────────────────────────────────────────────────────────────┤
-│  • SaveVoiceMemoUseCase (Complex: Coordinates 2 repos)          │
-│  • SearchMemosUseCase (Complex: Semantic search logic)          │
-│  • GenerateDemoEntriesUseCase (Complex: Orchestrates pipeline)  │
+│  • SaveVoiceMemoUseCase                                         │
+│  • SearchMemosUseCase                                           │
+│  • GenerateDemoEntriesUseCase                                   │
 │                                                                 │
 │  Simple CRUD operations go directly to repositories             │
 └─────────────────────────────────────────────────────────────────┘
