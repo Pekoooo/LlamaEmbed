@@ -27,21 +27,31 @@ A modern Android voice memo application that uses EmbeddingGemma model via llama
 
 ### Project Structure
 ```
-app/src/main/java/com/example/llamaembed/
-├── data/
-│   ├── local/              # Room database entities and DAOs
-│   └── repository/         # Repository implementations with Flow
-├── ml/                     # Embedding result classes
-├── domain/                 # Use cases for complex business logic
-├── speech/                 # Speech recognition functionality
-├── ui/
-│   ├── components/         # Reusable Compose components
-│   ├── screens/           # Main app screens
-│   ├── viewmodel/         # ViewModels with StateFlow
-│   └── theme/             # Material 3 theming
-├── di/                    # Hilt dependency injection modules
-├── MainActivity.kt        # Single activity with Compose
-└── VoiceMemoApplication.kt # Application class with model initialization
+┌─────────────────────────────────────────────────────────────────┐
+│                        PRESENTATION LAYER                       │
+├─────────────────────────────────────────────────────────────────┤
+│  VoiceMemoScreen (Compose UI) ← VoiceMemoViewModel (StateFlow)  │
+└─────────────────────────────────────────────────────────────────┘
+                                │
+                                ▼
+┌─────────────────────────────────────────────────────────────────┐
+│                         DOMAIN LAYER                            │
+├─────────────────────────────────────────────────────────────────┤
+│  • SaveVoiceMemoUseCase (Complex: Coordinates 2 repos)          │
+│  • SearchMemosUseCase (Complex: Semantic search logic)          │
+│  • GenerateDemoEntriesUseCase (Complex: Orchestrates pipeline)  │
+│                                                                 │
+│  Simple CRUD operations go directly to repositories             │
+└─────────────────────────────────────────────────────────────────┘
+                                │
+                                ▼
+┌─────────────────────────────────────────────────────────────────┐
+│                          DATA LAYER                             │
+├─────────────────────────────────────────────────────────────────┤
+│  VoiceMemoRepository ← VoiceMemoDao (Room Database)             │
+│  AIRepository ← LLamaAndroid (JNI) ← llama.cpp                  │
+│  SpeechRecognitionManager ← Android Speech API                  │
+└─────────────────────────────────────────────────────────────────┘
 ```
 
 ## Key Components
