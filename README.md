@@ -150,7 +150,7 @@ Query: "food shopping"          Stored Memo: "buy pizza ingredients"
 ### UI Components
 - **RecordButton**: Animated FAB with state transitions
 - **SearchBar**: Real-time search with debouncing
-- **VoiceMemoScreen**: Main screen with comprehensive state management
+- **VoiceMemoScreen**: Main screen with the list of Memos
 
 ## Setup Instructions
 
